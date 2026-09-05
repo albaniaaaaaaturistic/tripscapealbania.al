@@ -1,95 +1,1218 @@
+
 <!doctype html>
 <html lang="sq">
   <head>
     <meta charset="UTF-8" />
-
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-
-    <meta
-      name="theme-color"
-      content="#0f2a1d"
-    />
-
-    <meta
-      name="description"
-      content="tripscapealbania.com — Zbulo Shqipërinë ndryshe. Destinacione, fshatra, biznese lokale, eksperienca dhe histori shqiptare."
-    />
-
-    <meta
-      name="keywords"
-      content="Shqipëri, Albania, turizëm, udhëtime, Theth, Valbonë, Berat, Gjirokastër, Vlorë, Sarandë, Shkodër, Riviera Shqiptare"
-    />
-
-    <meta
-      name="author"
-      content="tripscapealbania.com"
-    />
-
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/vite.svg"
-    />
-
-    <!-- Open Graph -->
-    <meta
-      property="og:title"
-      content="tripscapealbania.com — Zbulo Shqipërinë"
-    />
-
-    <meta
-      property="og:description"
-      content="Zbulo destinacione, fshatra, biznese lokale dhe eksperienca në të gjithë Shqipërinë."
-    />
-
-    <meta
-      property="og:type"
-      content="website"
-    />
-
-    <meta
-      property="og:url"
-      content="https://tripscapealbania.com/"
-    />
-
-    <meta
-      property="og:image"
-      content="https://images.pexels.com/photos/28837424/pexels-photo-28837424.jpeg?auto=compress&cs=tinysrgb&w=1600"
-    />
-
-    <!-- Twitter -->
-    <meta
-      name="twitter:card"
-      content="summary_large_image"
-    />
-
-    <meta
-      name="twitter:title"
-      content="tripscapealbania.com — Zbulo Shqipërinë"
-    />
-
-    <meta
-      name="twitter:description"
-      content="Zbulo Shqipërinë ndryshe."
-    />
-
-    <meta
-      name="twitter:image"
-      content="https://images.pexels.com/photos/28837424/pexels-photo-28837424.jpeg?auto=compress&cs=tinysrgb&w=1600"
-    />
-
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>tripscapealbania.com — Zbulo Shqipërinë</title>
+    <meta property="og:image" content="https://bolt.new/static/og_default.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png" />
   </head>
-
   <body>
     <div id="root"></div>
-
-    <script
-      type="module"
-      src="/src/main.tsx"
-    ></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
+
+<!-- ===== package.json ===== -->
+{
+  "name": "vite-react-typescript-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.app.json"
+  },
+  "dependencies": {
+    "@supabase/Bolt Database-js": "^2.57.4",
+    "lucide-react": "^0.446.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.1",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.18",
+    "eslint": "^9.9.1",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.11",
+    "globals": "^15.9.0",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.3.0",
+    "vite": "^5.4.2"
+  }
+}
+
+<!-- ===== vite.config.ts ===== -->
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { fileURLToPath, URL } from 'node:url';
+
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
+  optimizeDeps: {
+    exclude: ['lucide-react'],
+  },
+});
+
+<!-- ===== tailwind.config.js ===== -->
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        forest: {
+          50: '#f0f7f3',
+          100: '#dceee4',
+          200: '#bbddcd',
+          300: '#8cc4ab',
+          400: '#56a383',
+          500: '#348866',
+          600: '#236d51',
+          700: '#1c5742',
+          800: '#173a29',
+          900: '#0f2a1d',
+          950: '#0a1c13',
+        },
+        sand: {
+          50: '#faf8f3',
+          100: '#f3eee0',
+          200: '#e6d9bf',
+          300: '#d6c197',
+          400: '#c5a66d',
+          500: '#b8914f',
+          600: '#a37b42',
+          700: '#856038',
+          800: '#6e4f34',
+          900: '#5d432e',
+        },
+        sky: {
+          50: '#f0f7fa',
+          100: '#dceef3',
+          200: '#bcdce6',
+          300: '#8cc2d2',
+          400: '#569fb6',
+          500: '#3a83a0',
+          600: '#316a87',
+          700: '#2b566e',
+          800: '#27485b',
+          900: '#243e4e',
+        },
+      },
+      fontFamily: {
+        display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        body: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      animation: {
+        'fade-up': 'fadeUp 0.7s ease-out forwards',
+        'fade-in': 'fadeIn 0.6s ease-out forwards',
+        'scale-in': 'scaleIn 0.5s ease-out forwards',
+        'float': 'float 6s ease-in-out infinite',
+        'shimmer': 'shimmer 2s linear infinite',
+      },
+      keyframes: {
+        fadeUp: {
+          '0%': { opacity: '0', transform: 'translateY(30px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        scaleIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-12px)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-1000px 0' },
+          '100%': { backgroundPosition: '1000px 0' },
+        },
+      },
+    },
+  },
+  plugins: [],
+};
+
+<!-- ===== postcss.config.js ===== -->
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+
+<!-- ===== tsconfig.json ===== -->
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
+
+<!-- ===== tsconfig.app.json ===== -->
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": { "@/*": ["src/*"] },
+    "strict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"]
+}
+
+<!-- ===== tsconfig.node.json ===== -->
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "strict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["vite.config.ts"]
+}
+
+<!-- ===== eslint.config.js ===== -->
+import js from '@eslint/js';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
+
+export default tseslint.config(
+  { ignores: ['dist'] },
+  {
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+    plugins: {
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+    },
+    rules: {
+      ...reactHooks.configs.recommended.rules,
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+    },
+  }
+);
+
+<!-- ===== src/main.tsx ===== -->
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+
+<!-- ===== src/App.tsx ===== -->
+import Header from '@/components/Header';
+import Hero from '@/components/Hero';
+import Destinations from '@/components/Destinations';
+import Villages from '@/components/Villages';
+import Businesses from '@/components/Businesses';
+import News from '@/components/News';
+import Gallery from '@/components/Gallery';
+import CTA from '@/components/CTA';
+import Footer from '@/components/Footer';
+
+function App() {
+  return (
+    <div className="min-h-screen bg-forest-50">
+      <Header />
+      <main>
+        <Hero />
+        <Destinations />
+        <Villages />
+        <Businesses />
+        <News />
+        <Gallery />
+        <CTA />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
+
+<!-- ===== src/index.css ===== -->
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-body text-forest-900 bg-forest-50 antialiased;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .hero-parallax {
+    background-attachment: fixed;
+  }
+  @media (max-width: 768px) {
+    .hero-parallax {
+      background-attachment: scroll;
+    }
+  }
+}
+
+<!-- ===== src/vite-env.d.ts ===== -->
+/// <reference types="vite/client" />
+
+<!-- ===== src/data/content.ts ===== -->
+export interface Destination {
+  id: string;
+  name: string;
+  tag: string;
+  description: string;
+  image: string;
+  region: string;
+}
+
+export interface Village {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+}
+
+export interface Business {
+  id: string;
+  name: string;
+  tag: string;
+  description: string;
+  image: string;
+}
+
+export interface GalleryImage {
+  id: string;
+  url: string;
+  alt: string;
+  span?: boolean;
+}
+
+export const destinations: Destination[] = [
+  {
+    id: 'theth',
+    name: 'Theth',
+    tag: 'Alpet',
+    region: 'Veri',
+    description: 'Male, shtigje, ujëvara dhe peizazhe alpine që të lënë pa frymë.',
+    image: 'https://images.pexels.com/photos/20854852/pexels-photo-20854852.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+  {
+    id: 'gjirokaster',
+    name: 'Gjirokastër',
+    tag: 'Kulturë',
+    region: 'Jug',
+    description: 'Gur, kala dhe rrugica me atmosferë unike në qytetin-muze.',
+    image: 'https://images.pexels.com/photos/38232799/pexels-photo-38232799.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+  {
+    id: 'vlore',
+    name: 'Vlorë',
+    tag: 'Riviera',
+    region: 'Jugperëndim',
+    description: 'Det, gjire dhe perëndime të paharrueshme në jugperëndim.',
+    image: 'https://images.pexels.com/photos/10409651/pexels-photo-10409651.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+  {
+    id: 'shkoder',
+    name: 'Shkodër',
+    tag: 'Veri',
+    region: 'Veri',
+    description: 'Liqeni, malet dhe kultura më e pasur e veriut shqiptar.',
+    image: 'https://images.pexels.com/photos/34061728/pexels-photo-34061728.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+  {
+    id: 'sarande',
+    name: 'Sarandë',
+    tag: 'Jug',
+    region: 'Jug',
+    description: 'Riviera, ishuj dhe plazhe me ujë kristal.',
+    image: 'https://images.pexels.com/photos/33067847/pexels-photo-33067847.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+  {
+    id: 'berat',
+    name: 'Berat',
+    tag: 'Trashëgimi',
+    region: 'Qendër',
+    description: 'Qyteti i një mbi një dritareve, trashëgimi botërore UNESCO.',
+    image: 'https://images.pexels.com/photos/36962945/pexels-photo-36962945.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+];
+
+export const villages: Village[] = [
+  {
+    id: 'borsh',
+    name: 'Borsh',
+    description: 'Deti, ullinjtë dhe jugu i qetë i Shqipërisë.',
+    image: 'https://images.pexels.com/photos/13580378/pexels-photo-13580378.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+  {
+    id: 'valbone',
+    name: 'Valbonë',
+    description: 'Peizazh alpin dhe shtigje në zemër të maleve.',
+    image: 'https://images.pexels.com/photos/28837424/pexels-photo-28837424.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+  {
+    id: 'dardhe',
+    name: 'Dardhë',
+    description: 'Fshat malor me natyrë dhe ajër të pastër.',
+    image: 'https://images.pexels.com/photos/32398470/pexels-photo-32398470.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+  {
+    id: 'razem',
+    name: 'Rrazëm',
+    description: 'Pyje, rehati dhe pushim në veriun e freskët.',
+    image: 'https://images.pexels.com/photos/13820915/pexels-photo-13820915.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+];
+
+export const businesses: Business[] = [
+  {
+    id: 'hotels',
+    name: 'Hotele & Bujtina',
+    tag: 'Akomodim',
+    description: 'Qëndrime lokale dhe autentike në destinacionin tënd.',
+    image: 'https://images.pexels.com/photos/3926224/pexels-photo-3926224.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+  {
+    id: 'restaurants',
+    name: 'Restorante',
+    tag: 'Ushqim',
+    description: 'Shijo kuzhinën tradicionale shqiptare në ambientet më të mira.',
+    image: 'https://images.pexels.com/photos/26076228/pexels-photo-26076228.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+  {
+    id: 'guides',
+    name: 'Guida & Aktivitete',
+    tag: 'Eksperienca',
+    description: 'Ecje, aventura dhe aktivitete me guida lokale eksperte.',
+    image: 'https://images.pexels.com/photos/1687514/pexels-photo-1687514.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+];
+
+export const galleryImages: GalleryImage[] = [
+  {
+    id: 'g1',
+    url: 'https://images.pexels.com/photos/29079438/pexels-photo-29079438.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    alt: 'Peizazh shqiptar',
+    span: true,
+  },
+  {
+    id: 'g2',
+    url: 'https://images.pexels.com/photos/31993479/pexels-photo-31993479.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    alt: 'Male të ashpra',
+  },
+  {
+    id: 'g3',
+    url: 'https://images.pexels.com/photos/38328013/pexels-photo-38328013.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    alt: 'Plazh Ksamil',
+  },
+  {
+    id: 'g4',
+    url: 'https://images.pexels.com/photos/28281511/pexels-photo-28281511.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    alt: 'Kodra dhe deti',
+  },
+  {
+    id: 'g5',
+    url: 'https://images.pexels.com/photos/32101125/pexels-photo-32101125.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    alt: 'Male në diell',
+  },
+];
+
+<!-- ===== src/hooks/useReveal.ts ===== -->
+import { useEffect, useRef, useState } from 'react';
+
+export function useReveal<T extends HTMLElement = HTMLDivElement>() {
+  const ref = useRef<T>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, visible };
+}
+
+<!-- ===== src/components/Header.tsx ===== -->
+import { useEffect, useState } from 'react';
+import { Menu, X, Mountain } from 'lucide-react';
+
+const navLinks = [
+  { label: 'Destinacione', href: '#destinacione' },
+  { label: 'Fshatra', href: '#fshatra' },
+  { label: 'Biznese', href: '#biznese' },
+  { label: 'Lajme', href: '#lajme' },
+  { label: 'Galeri', href: '#galeri' },
+];
+
+export default function Header() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? 'bg-white/90 backdrop-blur-md shadow-[0_1px_20px_rgba(23,58,41,0.08)]'
+          : 'bg-transparent'
+      }`}
+    >
+      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:h-20 sm:px-8">
+        <a href="#top" className="group flex items-center gap-2">
+          <span
+            className={`flex h-9 w-9 items-center justify-center rounded-xl transition-colors duration-300 ${
+              scrolled ? 'bg-forest-700' : 'bg-white/15 backdrop-blur-sm'
+            }`}
+          >
+            <Mountain className="h-5 w-5 text-white" strokeWidth={2.5} />
+          </span>
+          <span
+            className={`font-display text-lg font-extrabold tracking-tight transition-colors duration-300 sm:text-xl ${
+              scrolled ? 'text-forest-900' : 'text-white'
+            }`}
+          >
+            tripscape<span className="text-forest-500">albania</span>.com
+          </span>
+        </a>
+
+        <div className="hidden items-center gap-1 lg:flex">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className={`rounded-lg px-4 py-2 text-sm font-semibold transition-colors duration-200 ${
+                scrolled
+                  ? 'text-forest-700 hover:bg-forest-50 hover:text-forest-900'
+                  : 'text-white/90 hover:bg-white/10 hover:text-white'
+              }`}
+            >
+              {link.label}
+            </a>
+          ))}
+          <a
+            href="#admin"
+            className={`ml-3 rounded-lg border px-4 py-2 text-sm font-bold transition-all duration-200 ${
+              scrolled
+                ? 'border-forest-200 text-forest-800 hover:border-forest-400 hover:bg-forest-50'
+                : 'border-white/30 text-white hover:border-white/60 hover:bg-white/10'
+            }`}
+          >
+            Admin
+          </a>
+        </div>
+
+        <button
+          onClick={() => setOpen(!open)}
+          className={`flex h-10 w-10 items-center justify-center rounded-lg transition-colors lg:hidden ${
+            scrolled ? 'text-forest-800 hover:bg-forest-50' : 'text-white hover:bg-white/10'
+          }`}
+          aria-label="Menu"
+        >
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
+      </nav>
+
+      <div
+        className={`overflow-hidden bg-white/95 backdrop-blur-md transition-all duration-300 lg:hidden ${
+          open ? 'max-h-96 border-b border-forest-100' : 'max-h-0'
+        }`}
+      >
+        <div className="flex flex-col gap-1 px-5 py-4">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => setOpen(false)}
+              className="rounded-lg px-4 py-3 text-sm font-semibold text-forest-700 transition-colors hover:bg-forest-50 hover:text-forest-900"
+            >
+              {link.label}
+            </a>
+          ))}
+          <a
+            href="#admin"
+            onClick={() => setOpen(false)}
+            className="mt-1 rounded-lg border border-forest-200 px-4 py-3 text-sm font-bold text-forest-800"
+          >
+            Admin
+          </a>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+<!-- ===== src/components/Hero.tsx ===== -->
+import { ArrowRight, MapPin, Compass } from 'lucide-react';
+
+export default function Hero() {
+  return (
+    <section id="top" className="relative min-h-[100svh] overflow-hidden">
+      <div
+        className="absolute inset-0 hero-parallax bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "url('https://images.pexels.com/photos/28837424/pexels-photo-28837424.jpeg?auto=compress&cs=tinysrgb&h=1200&w=1800')",
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-forest-950/85 via-forest-900/60 to-forest-900/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-forest-950/60 via-transparent to-transparent" />
+
+      <div className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-5 pt-20 pb-16 sm:px-8">
+        <div className="max-w-2xl">
+          <div
+            className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-sm animate-fade-in"
+            style={{ animationDelay: '0.1s' }}
+          >
+            <MapPin className="h-4 w-4 text-forest-300" />
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
+              Mirë se vini në Shqipëri
+            </span>
+          </div>
+
+          <h1
+            className="font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-white text-balance animate-fade-up sm:text-6xl lg:text-7xl"
+            style={{ animationDelay: '0.2s' }}
+          >
+            Zbulo Shqipërinë{' '}
+            <span className="bg-gradient-to-r from-forest-300 to-sand-300 bg-clip-text text-transparent">
+              ndryshe.
+            </span>
+          </h1>
+
+          <p
+            className="mt-6 max-w-xl text-lg leading-relaxed text-white/80 animate-fade-up sm:text-xl"
+            style={{ animationDelay: '0.35s' }}
+          >
+            tripscapealbania.com të ndihmon të gjesh destinacione, fshatra,
+            eksperienca, biznese lokale dhe histori që ia vlen t'i jetosh.
+          </p>
+
+          <div
+            className="mt-9 flex flex-wrap gap-3 animate-fade-up"
+            style={{ animationDelay: '0.5s' }}
+          >
+            <a
+              href="#destinacione"
+              className="group inline-flex items-center gap-2 rounded-xl bg-forest-500 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-forest-900/30 transition-all duration-300 hover:bg-forest-400 hover:shadow-xl hover:shadow-forest-900/40 hover:-translate-y-0.5"
+            >
+              Eksploro destinacionet
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </a>
+            <a
+              href="#biznese"
+              className="inline-flex items-center gap-2 rounded-xl bg-white/95 px-6 py-3.5 text-sm font-bold text-forest-800 shadow-lg shadow-forest-900/20 transition-all duration-300 hover:bg-white hover:-translate-y-0.5"
+            >
+              <Compass className="h-4 w-4" />
+              Shiko bizneset
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 sm:block">
+        <div className="flex h-10 w-6 items-start justify-center rounded-full border-2 border-white/30 p-1.5">
+          <div className="h-2 w-1 animate-bounce rounded-full bg-white/60" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+<!-- ===== src/components/Destinations.tsx ===== -->
+import { destinations } from '@/data/content';
+import { ArrowRight, MapPin } from 'lucide-react';
+import { useReveal } from '@/hooks/useReveal';
+
+export default function Destinations() {
+  const { ref, visible } = useReveal<HTMLDivElement>();
+
+  return (
+    <section id="destinacione" className="bg-forest-50 py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div
+          ref={ref}
+          className={`reveal mb-12 max-w-2xl ${visible ? 'is-visible' : ''}`}
+        >
+          <span className="mb-3 inline-block text-xs font-bold uppercase tracking-[0.2em] text-forest-600">
+            Destinacione
+          </span>
+          <h2 className="font-display text-3xl font-extrabold tracking-tight text-forest-900 sm:text-4xl">
+            Destinacione për të zbuluar
+          </h2>
+          <p className="mt-3 text-lg text-forest-700/70">
+            Nga Alpet te Riviera, zgjidh vendin tënd të radhës.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {destinations.map((dest, i) => (
+            <article
+              key={dest.id}
+              className={`group relative overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-forest-100 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-forest-900/10 hover:ring-forest-200 reveal ${
+                visible ? 'is-visible' : ''
+              }`}
+              style={{ transitionDelay: `${i * 80}ms` }}
+            >
+              <div className="relative h-56 overflow-hidden">
+                <img
+                  src={dest.image}
+                  alt={dest.name}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-forest-950/40 to-transparent" />
+                <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-forest-700 backdrop-blur-sm">
+                  {dest.tag}
+                </span>
+              </div>
+              <div className="p-5">
+                <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold text-forest-500">
+                  <MapPin className="h-3.5 w-3.5" />
+                  {dest.region}
+                </div>
+                <h3 className="font-display text-xl font-bold text-forest-900">
+                  {dest.name}
+                </h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-forest-700/70">
+                  {dest.description}
+                </p>
+                <a
+                  href={`#${dest.id}`}
+                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-forest-600 transition-colors hover:text-forest-800"
+                >
+                  Hap {dest.name}
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+<!-- ===== src/components/Villages.tsx ===== -->
+import { villages } from '@/data/content';
+import { ArrowRight } from 'lucide-react';
+import { useReveal } from '@/hooks/useReveal';
+
+export default function Villages() {
+  const { ref, visible } = useReveal<HTMLDivElement>();
+
+  return (
+    <section id="fshatra" className="relative overflow-hidden bg-forest-900 py-20 sm:py-28">
+      <div className="pointer-events-none absolute -right-40 top-0 h-96 w-96 rounded-full bg-forest-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute -left-40 bottom-0 h-96 w-96 rounded-full bg-sand-500/5 blur-3xl" />
+
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+        <div
+          ref={ref}
+          className={`reveal mb-12 max-w-2xl ${visible ? 'is-visible' : ''}`}
+        >
+          <span className="mb-3 inline-block text-xs font-bold uppercase tracking-[0.2em] text-forest-300">
+            Fshatra
+          </span>
+          <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            Fshatra që ia vlen t'i vizitosh
+          </h2>
+          <p className="mt-3 text-lg text-forest-200/70">
+            Natyrë, tradita dhe eksperienca lokale autentike.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {villages.map((v, i) => (
+            <article
+              key={v.id}
+              className={`group relative overflow-hidden rounded-2xl reveal ${visible ? 'is-visible' : ''}`}
+              style={{ transitionDelay: `${i * 100}ms` }}
+            >
+              <div className="relative h-72 overflow-hidden rounded-2xl ring-1 ring-white/10">
+                <img
+                  src={v.image}
+                  alt={v.name}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/30 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-5">
+                  <h3 className="font-display text-xl font-bold text-white">
+                    {v.name}
+                  </h3>
+                  <p className="mt-1 text-sm leading-relaxed text-white/70">
+                    {v.description}
+                  </p>
+                  <a
+                    href={`#${v.id}`}
+                    className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-forest-300 transition-colors hover:text-white"
+                  >
+                    Eksploro
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+<!-- ===== src/components/Businesses.tsx ===== -->
+import { businesses } from '@/data/content';
+import { ArrowRight } from 'lucide-react';
+import { useReveal } from '@/hooks/useReveal';
+
+export default function Businesses() {
+  const { ref, visible } = useReveal<HTMLDivElement>();
+
+  return (
+    <section id="biznese" className="bg-forest-50 py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div
+          ref={ref}
+          className={`reveal mb-12 max-w-2xl ${visible ? 'is-visible' : ''}`}
+        >
+          <span className="mb-3 inline-block text-xs font-bold uppercase tracking-[0.2em] text-forest-600">
+            Biznese
+          </span>
+          <h2 className="font-display text-3xl font-extrabold tracking-tight text-forest-900 sm:text-4xl">
+            Mbështet bizneset lokale
+          </h2>
+          <p className="mt-3 text-lg text-forest-700/70">
+            Hotele, restorante, guida dhe eksperienca në të gjithë Shqipërinë.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {businesses.map((biz, i) => (
+            <article
+              key={biz.id}
+              className={`group relative overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-forest-100 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-forest-900/10 reveal ${
+                visible ? 'is-visible' : ''
+              }`}
+              style={{ transitionDelay: `${i * 100}ms` }}
+            >
+              <div className="relative h-56 overflow-hidden">
+                <img
+                  src={biz.image}
+                  alt={biz.name}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-forest-950/30 to-transparent" />
+                <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-forest-700 backdrop-blur-sm">
+                  {biz.tag}
+                </span>
+              </div>
+              <div className="p-5">
+                <h3 className="font-display text-xl font-bold text-forest-900">
+                  {biz.name}
+                </h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-forest-700/70">
+                  {biz.description}
+                </p>
+                <a
+                  href={`#${biz.id}`}
+                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-forest-600 transition-colors hover:text-forest-800"
+                >
+                  Mëso më shumë
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+<!-- ===== src/components/News.tsx ===== -->
+import { Newspaper, Calendar, Users, ArrowRight } from 'lucide-react';
+import { useReveal } from '@/hooks/useReveal';
+
+const items = [
+  {
+    icon: Newspaper,
+    title: 'Destinacione të reja',
+    description: 'Ide dhe rekomandime për udhëtimin tënd të radhës në Shqipëri.',
+  },
+  {
+    icon: Calendar,
+    title: 'Evente & aktivitete',
+    description: 'Çfarë po ndodh në botën e turizmit shqiptar muaj pas muaji.',
+  },
+  {
+    icon: Users,
+    title: 'Histori lokale',
+    description: 'Njerëz, tradita dhe vende që bëjnë Shqipërinë unike.',
+  },
+];
+
+export default function News() {
+  const { ref, visible } = useReveal<HTMLDivElement>();
+
+  return (
+    <section id="lajme" className="relative overflow-hidden bg-forest-900 py-20 sm:py-28">
+      <div className="pointer-events-none absolute left-1/2 top-0 h-80 w-[600px] -translate-x-1/2 rounded-full bg-forest-500/8 blur-3xl" />
+
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+        <div
+          ref={ref}
+          className={`reveal mb-12 max-w-2xl ${visible ? 'is-visible' : ''}`}
+        >
+          <span className="mb-3 inline-block text-xs font-bold uppercase tracking-[0.2em] text-forest-300">
+            Lajme
+          </span>
+          <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            Lajmet e turizmit
+          </h2>
+          <p className="mt-3 text-lg text-forest-200/70">
+            Një hapësirë për lajme, guida dhe evente që çojnë përpara turizmin shqiptar.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={i}
+                className={`group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-500 hover:border-white/20 hover:bg-white/10 reveal ${
+                  visible ? 'is-visible' : ''
+                }`}
+                style={{ transitionDelay: `${i * 100}ms` }}
+              >
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-forest-500/20 text-forest-300 transition-colors group-hover:bg-forest-500/30">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <h3 className="font-display text-lg font-bold text-white">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-forest-200/60">
+                  {item.description}
+                </p>
+              </div>
+            );
+          })}
+
+          <a
+            href="#lajme"
+            className={`group flex flex-col justify-end rounded-2xl border border-forest-500/30 bg-forest-500/10 p-6 transition-all duration-500 hover:border-forest-500/50 hover:bg-forest-500/20 reveal ${
+              visible ? 'is-visible' : ''
+            }`}
+            style={{ transitionDelay: '300ms' }}
+          >
+            <h3 className="font-display text-lg font-bold text-white">
+              Lexo më shumë
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-forest-200/60">
+              Hap lajmet dhe guidat e plota.
+            </p>
+            <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-forest-300 transition-colors group-hover:text-white">
+              Hap lajmet
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+<!-- ===== src/components/Gallery.tsx ===== -->
+import { galleryImages } from '@/data/content';
+import { useReveal } from '@/hooks/useReveal';
+
+export default function Gallery() {
+  const { ref, visible } = useReveal<HTMLDivElement>();
+
+  return (
+    <section id="galeri" className="bg-forest-50 py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div
+          ref={ref}
+          className={`reveal mb-12 max-w-2xl ${visible ? 'is-visible' : ''}`}
+        >
+          <span className="mb-3 inline-block text-xs font-bold uppercase tracking-[0.2em] text-forest-600">
+            Galeri
+          </span>
+          <h2 className="font-display text-3xl font-extrabold tracking-tight text-forest-900 sm:text-4xl">
+            Shqipëria në foto
+          </h2>
+          <p className="mt-3 text-lg text-forest-700/70">
+            Galeria do të zgjerohet me materiale nga destinacionet.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {galleryImages.map((img, i) => (
+            <div
+              key={img.id}
+              className={`group relative overflow-hidden rounded-2xl shadow-sm ring-1 ring-forest-100 transition-all duration-500 hover:shadow-lg hover:ring-forest-200 reveal ${
+                visible ? 'is-visible' : ''
+              } ${img.span ? 'lg:col-span-2 lg:row-span-2' : ''}`}
+              style={{ transitionDelay: `${i * 80}ms` }}
+            >
+              <div className={`relative ${img.span ? 'h-64 sm:h-80 lg:h-full' : 'h-56'}`}>
+                <img
+                  src={img.url}
+                  alt={img.alt}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-forest-950/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <span className="absolute bottom-4 left-4 translate-y-2 text-sm font-semibold text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                  {img.alt}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+<!-- ===== src/components/CTA.tsx ===== -->
+import { Mail, ArrowRight } from 'lucide-react';
+import { useReveal } from '@/hooks/useReveal';
+
+export default function CTA() {
+  const { ref, visible } = useReveal<HTMLDivElement>();
+
+  return (
+    <section className="bg-forest-50 py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div
+          ref={ref}
+          className={`relative overflow-hidden rounded-3xl bg-gradient-to-br from-forest-800 to-forest-900 px-6 py-14 shadow-xl sm:px-12 sm:py-16 reveal ${
+            visible ? 'is-visible' : ''
+          }`}
+        >
+          <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-forest-500/15 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-sand-500/10 blur-3xl" />
+
+          <div className="relative max-w-2xl">
+            <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              Ke një biznes turistik?
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-forest-200/80">
+              tripscapealbania.com synon të lidhë vizitorët me bizneset lokale. Në
+              versionin e plotë bizneset do të mund të aplikojnë për t'u shfaqur
+              në platformë.
+            </p>
+            <a
+              href="mailto:tripscapealbania@gmail.com"
+              className="group mt-8 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-forest-800 shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+            >
+              <Mail className="h-4 w-4" />
+              Na kontakto
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+<!-- ===== src/components/Footer.tsx ===== -->
+import { Mountain, Facebook, Instagram, Twitter, Mail } from 'lucide-react';
+
+const exploreLinks = [
+  { label: 'Destinacione', href: '#destinacione' },
+  { label: 'Fshatra', href: '#fshatra' },
+  { label: 'Biznese', href: '#biznese' },
+];
+
+const platformLinks = [
+  { label: 'Lajme', href: '#lajme' },
+  { label: 'Galeri', href: '#galeri' },
+  { label: 'Admin', href: '#admin' },
+];
+
+const socials = [
+  { icon: Facebook, href: '#', label: 'Facebook' },
+  { icon: Instagram, href: '#', label: 'Instagram' },
+  { icon: Twitter, href: '#', label: 'Twitter' },
+  { icon: Mail, href: 'mailto:tripscapealbania@gmail.com', label: 'Email' },
+];
+
+export default function Footer() {
+  return (
+    <footer className="bg-forest-950 text-forest-100">
+      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="lg:col-span-2">
+            <div className="flex items-center gap-2">
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-forest-700">
+                <Mountain className="h-5 w-5 text-white" strokeWidth={2.5} />
+              </span>
+              <span className="font-display text-lg font-extrabold text-white">
+                tripscape<span className="text-forest-400">albania</span>.com
+              </span>
+            </div>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-forest-300/70">
+              Një platformë për të zbuluar dhe mbështetur turizmin shqiptar — nga
+              Alpet e Veriut te Riviera e Jonit.
+            </p>
+            <div className="mt-6 flex gap-3">
+              {socials.map((s) => {
+                const Icon = s.icon;
+                return (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    aria-label={s.label}
+                    className="flex h-10 w-10 items-center justify-center rounded-xl border border-forest-800 text-forest-300 transition-all duration-200 hover:border-forest-600 hover:bg-forest-800 hover:text-white"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-display text-sm font-bold uppercase tracking-wider text-white">
+              Eksploro
+            </h3>
+            <ul className="mt-4 space-y-3">
+              {exploreLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-forest-300/70 transition-colors hover:text-white"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-display text-sm font-bold uppercase tracking-wider text-white">
+              Platforma
+            </h3>
+            <ul className="mt-4 space-y-3">
+              {platformLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-forest-300/70 transition-colors hover:text-white"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 border-t border-forest-800/60 pt-6">
+          <p className="text-sm text-forest-400/60">
+            © 2026 tripscapealbania.com. Të gjitha të drejtat e rezervuara.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+              </html>
